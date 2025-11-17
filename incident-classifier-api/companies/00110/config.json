@@ -1,0 +1,27 @@
+{
+  "company_id": "00110",
+  "company_name": "Sample Mining Company",
+  "departments": [
+    "Maintenance Department",
+    "Safety & HSE Team",
+    "Environmental Compliance",
+    "Engineering Department",
+    "Emergency Response Team"
+  ],
+  "incident_types": [
+    "Equipment Failure",
+    "Safety Hazard",
+    "Environmental Issue",
+    "Structural Damage",
+    "Fire or Explosion"
+  ],
+  "department_mapping": {
+    "Equipment Failure": "Maintenance Department",
+    "Safety Hazard": "Safety & HSE Team",
+    "Environmental Issue": "Environmental Compliance",
+    "Structural Damage": "Engineering Department",
+    "Fire or Explosion": "Emergency Response Team"
+  },
+  "confidence_threshold": 0.6,
+  "created_at": "2025-11-17"
+}

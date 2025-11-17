@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+venv/
+*.pth
+*.pt
+.env
+.vscode/
+.idea/
+training_data/train/
+training_data/val/
+*.jpg
+*.jpeg
+*.png
+*.log
