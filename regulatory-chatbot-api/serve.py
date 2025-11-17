@@ -1,274 +1,587 @@
 """
-FastAPI server for semantic search and QA over mining laws.
-
-Endpoints:
-- GET /: Health check
-- POST /search: Top-K retrieval
-- POST /chat: Retrieval + answer generation
+Enhanced RAG Server with Hybrid Retrieval, Query Expansion, and Better Generation
+Version 2.0 - Production-ready implementation with Online LLM Support
 """
 
 import pickle
+import json
+import numpy as np
 import faiss
+import os
 from pathlib import Path
+from typing import List, Dict, Optional
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import pipeline
+from rank_bm25 import BM25Okapi
+import logging
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Mining Laws QA API", version="1.0.0")
+# LLM Configuration - Set environment variables to use online LLMs
+USE_ONLINE_LLM = os.getenv("USE_ONLINE_LLM", "false").lower() == "true"
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "groq")  # "groq", "openai", "anthropic"
+LLM_API_KEY = os.getenv("LLM_API_KEY", "")
+LLM_MODEL = os.getenv("LLM_MODEL", "llama-3.1-70b-versatile")  # For Groq
 
-# Global state
+# Initialize FastAPI
+app = FastAPI(
+    title="Mining Laws RAG API v2.0",
+    description="Enhanced RAG system with hybrid retrieval and query expansion",
+    version="2.0.0"
+)
+
+# Global variables for loaded models
 chunks = None
-encoder = None
-index = None
-tokenizer = None
+faiss_index = None
+embedding_model = None
 generator = None
+bm25_index = None
 
 
-def load_resources():
-    """Load all models and data at startup."""
-    global chunks, encoder, index, tokenizer, generator
-    
-    print("Loading resources...")
-    project_root = Path(__file__).parent
-    data_dir = project_root / 'data'
-    models_dir = project_root / 'models'
-    
-    # Load chunks
-    chunks_file = data_dir / 'chunks.pkl'
-    if not chunks_file.exists():
-        raise FileNotFoundError(f"Chunks not found: {chunks_file}")
-    
-    with open(chunks_file, 'rb') as f:
-        chunks = pickle.load(f)
-    print(f"✓ Loaded {len(chunks)} chunks")
-    
-    # Load encoder (use fine-tuned if available)
-    finetuned_dir = models_dir / 'bi_encoder_finetuned'
-    if finetuned_dir.exists():
-        encoder = SentenceTransformer(str(finetuned_dir))
-        print(f"✓ Loaded fine-tuned encoder")
-    else:
-        encoder = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-        print(f"✓ Loaded base encoder")
-    
-    # Load FAISS index
-    index_file = models_dir / 'mining_laws.index'
-    if not index_file.exists():
-        raise FileNotFoundError(f"Index not found: {index_file}")
-    
-    index = faiss.read_index(str(index_file))
-    print(f"✓ Loaded FAISS index ({index.ntotal} vectors)")
-    
-    # Load T5 generator (use base for better quality, small for faster inference)
-    model_name = 'google/flan-t5-base'  # Options: flan-t5-small, flan-t5-base, flan-t5-large
-    tokenizer = T5Tokenizer.from_pretrained(model_name)
-    generator = T5ForConditionalGeneration.from_pretrained(model_name)
-    print(f"✓ Loaded T5 generator ({model_name})")
-    
-    print("All resources loaded successfully!\n")
-
-
-# Load on startup
-@app.on_event("startup")
-async def startup_event():
-    load_resources()
-
-
-# Request models
 class SearchRequest(BaseModel):
     query: str
-    top_k: int = 1
+    top_k: int = 5
+    use_hybrid: bool = True
+    use_query_expansion: bool = False
+    dense_weight: float = 0.7
+    sparse_weight: float = 0.3
 
 
 class ChatRequest(BaseModel):
     query: str
-    generate_answer: bool = True
     top_k: int = 3
-    answer_style: str = "detailed"  # "detailed" or "extractive"
+    generate_answer: bool = True
+    use_hybrid: bool = True
+    use_query_expansion: bool = False
+    answer_style: str = "detailed"  # "detailed" or "concise"
+    dense_weight: float = 0.7
+    sparse_weight: float = 0.3
 
 
-# Endpoints
+class HybridRetriever:
+    """Hybrid retrieval combining FAISS and BM25"""
+    
+    def __init__(
+        self,
+        chunks: List[Dict],
+        faiss_index: faiss.Index,
+        embedding_model: SentenceTransformer,
+        dense_weight: float = 0.7,
+        sparse_weight: float = 0.3
+    ):
+        self.chunks = chunks
+        self.faiss_index = faiss_index
+        self.embedding_model = embedding_model
+        self.dense_weight = dense_weight
+        self.sparse_weight = sparse_weight
+        
+        # Build BM25 index
+        corpus_texts = [chunk['text'] for chunk in chunks]
+        tokenized_corpus = [text.lower().split() for text in corpus_texts]
+        self.bm25 = BM25Okapi(tokenized_corpus)
+    
+    def retrieve(
+        self,
+        query: str,
+        top_k: int = 10,
+        use_hybrid: bool = True,
+        query_embedding: Optional[np.ndarray] = None
+    ) -> List[Dict]:
+        """Retrieve relevant chunks"""
+        
+        if not use_hybrid:
+            # Dense only (FAISS)
+            if query_embedding is None:
+                query_embedding = self.embedding_model.encode(
+                    query,
+                    normalize_embeddings=True,
+                    convert_to_numpy=True
+                )
+            
+            distances, indices = self.faiss_index.search(
+                query_embedding.reshape(1, -1).astype('float32'),
+                k=top_k
+            )
+            
+            results = []
+            for idx, score in zip(indices[0], distances[0]):
+                chunk = self.chunks[idx].copy()
+                chunk['score'] = float(score)
+                results.append(chunk)
+            
+            return results
+        
+        # Hybrid retrieval
+        retrieval_k = top_k * 2
+        
+        # Dense retrieval
+        if query_embedding is None:
+            query_embedding = self.embedding_model.encode(
+                query,
+                normalize_embeddings=True,
+                convert_to_numpy=True
+            )
+        
+        distances, indices = self.faiss_index.search(
+            query_embedding.reshape(1, -1).astype('float32'),
+            k=retrieval_k
+        )
+        
+        dense_dict = {int(idx): float(score) for idx, score in zip(indices[0], distances[0])}
+        
+        # Sparse retrieval (BM25)
+        tokenized_query = query.lower().split()
+        bm25_scores = self.bm25.get_scores(tokenized_query)
+        top_bm25_indices = np.argsort(bm25_scores)[::-1][:retrieval_k]
+        sparse_dict = {int(idx): float(bm25_scores[idx]) for idx in top_bm25_indices}
+        
+        # Normalize and combine
+        dense_scores = self._normalize_scores(list(dense_dict.values()))
+        sparse_scores = self._normalize_scores(list(sparse_dict.values()))
+        
+        dense_dict = {idx: score for idx, score in zip(dense_dict.keys(), dense_scores)}
+        sparse_dict = {idx: score for idx, score in zip(sparse_dict.keys(), sparse_scores)}
+        
+        # Combine scores
+        all_indices = set(dense_dict.keys()) | set(sparse_dict.keys())
+        combined_scores = {}
+        
+        for idx in all_indices:
+            combined_scores[idx] = (
+                self.dense_weight * dense_dict.get(idx, 0.0) +
+                self.sparse_weight * sparse_dict.get(idx, 0.0)
+            )
+        
+        # Sort and return top-k
+        ranked_indices = sorted(
+            combined_scores.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )[:top_k]
+        
+        results = []
+        for idx, score in ranked_indices:
+            chunk = self.chunks[idx].copy()
+            chunk['score'] = float(score)
+            chunk['dense_score'] = dense_dict.get(idx, 0.0)
+            chunk['sparse_score'] = sparse_dict.get(idx, 0.0)
+            results.append(chunk)
+        
+        return results
+    
+    def _normalize_scores(self, scores: List[float]) -> List[float]:
+        """Normalize scores to [0, 1]"""
+        if not scores:
+            return []
+        scores_arr = np.array(scores)
+        min_s = scores_arr.min()
+        max_s = scores_arr.max()
+        if max_s - min_s == 0:
+            return [1.0] * len(scores)
+        return ((scores_arr - min_s) / (max_s - min_s)).tolist()
+
+
+class QueryExpander:
+    """Query expansion using HyDE"""
+    
+    def __init__(self, embedding_model: SentenceTransformer, generator):
+        self.embedding_model = embedding_model
+        self.generator = generator
+    
+    def expand_query(self, query: str) -> np.ndarray:
+        """Generate hypothetical document and return expanded embedding"""
+        
+        # Generate hypothetical answer
+        prompt = f"""Generate a detailed formal answer to this mining law question:
+
+Question: {query}
+
+Answer (use legal language):"""
+        
+        result = self.generator(
+            prompt,
+            max_new_tokens=100,
+            min_length=50,
+            num_beams=4,
+            do_sample=False  # Deterministic for caching
+        )
+        
+        hypo_doc = result[0]['generated_text']
+        
+        # Encode both query and hypothetical document
+        query_emb = self.embedding_model.encode(
+            query,
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+        
+        hypo_emb = self.embedding_model.encode(
+            hypo_doc,
+            normalize_embeddings=True,
+            convert_to_numpy=True
+        )
+        
+        # Average and normalize
+        expanded_emb = (query_emb + hypo_emb) / 2
+        expanded_emb = expanded_emb / np.linalg.norm(expanded_emb)
+        
+        return expanded_emb
+
+
+def generate_answer_with_online_llm(prompt: str, provider: str = "groq") -> str:
+    """
+    Generate answer using online LLM APIs (Groq, OpenAI, etc.)
+    Much better quality than local FLAN-T5
+    """
+    try:
+        if provider == "groq":
+            # Groq API (Fast and Free!)
+            import requests
+            
+            headers = {
+                "Authorization": f"Bearer {LLM_API_KEY}",
+                "Content-Type": "application/json"
+            }
+            
+            data = {
+                "model": LLM_MODEL,
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are an expert legal assistant specializing in Indian mining laws and regulations. Provide clear, accurate answers based on the legal context provided."
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                "temperature": 0.3,
+                "max_tokens": 500,
+                "top_p": 0.9
+            }
+            
+            response = requests.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers=headers,
+                json=data,
+                timeout=30
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                return result['choices'][0]['message']['content'].strip()
+            else:
+                logger.error(f"Groq API error: {response.status_code} - {response.text}")
+                return "Error: Could not generate answer with online LLM"
+                
+        elif provider == "openai":
+            # OpenAI API
+            import openai
+            openai.api_key = LLM_API_KEY
+            
+            response = openai.ChatCompletion.create(
+                model=LLM_MODEL or "gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are an expert legal assistant specializing in Indian mining laws."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=500
+            )
+            return response.choices[0].message.content.strip()
+            
+        else:
+            return "Error: Unsupported LLM provider"
+            
+    except Exception as e:
+        logger.error(f"Online LLM error: {e}")
+        return f"Error generating answer: {str(e)}"
+
+
+@app.on_event("startup")
+async def load_resources():
+    """Load all models and indices on startup"""
+    global chunks, faiss_index, embedding_model, generator, bm25_index
+    
+    try:
+        project_dir = Path(__file__).parent
+        data_dir = project_dir / 'data'
+        models_dir = project_dir / 'models'
+        
+        # Load chunks
+        chunks_file = data_dir / 'chunks.pkl'
+        logger.info(f"Loading chunks from {chunks_file}")
+        with open(chunks_file, 'rb') as f:
+            chunks = pickle.load(f)
+        logger.info(f"✓ Loaded {len(chunks)} chunks")
+        
+        # Load FAISS index
+        index_file = models_dir / 'mining_laws.index'
+        logger.info(f"Loading FAISS index from {index_file}")
+        faiss_index = faiss.read_index(str(index_file))
+        logger.info(f"✓ Loaded FAISS index ({faiss_index.ntotal} vectors)")
+        
+        # Load metadata
+        meta_file = models_dir / 'index_meta.json'
+        
+        with open(meta_file, 'r') as f:
+            metadata = json.load(f)
+        
+        model_name = metadata.get('model', 'sentence-transformers/all-MiniLM-L6-v2')
+        
+        # Load embedding model
+        logger.info(f"Loading embedding model: {model_name}")
+        embedding_model = SentenceTransformer(model_name)
+        logger.info(f"✓ Loaded embedding model (dim: {embedding_model.get_sentence_embedding_dimension()})")
+        
+        # Load generator (use FLAN-T5-base for efficiency)
+        # For better quality, change to "google/flan-t5-large" (requires 4GB+ RAM and download time)
+        generator_model = "google/flan-t5-base"
+        logger.info(f"Loading generator: {generator_model}")
+        generator = pipeline(
+            "text2text-generation",
+            model=generator_model,
+            device=-1
+        )
+        logger.info(f"✓ Loaded {generator_model}")
+        
+        logger.info("="*60)
+        logger.info("✓ All resources loaded successfully!")
+        logger.info("="*60)
+        
+    except Exception as e:
+        logger.error(f"Failed to load resources: {e}")
+        raise
+
+
 @app.get("/")
-def health_check():
-    """Health check endpoint."""
+async def health_check():
+    """Health check endpoint"""
     return {
-        "status": "ok",
-        "service": "Mining Laws QA API",
+        "status": "healthy",
+        "version": "2.0.0",
         "chunks": len(chunks) if chunks else 0,
-        "index_size": index.ntotal if index else 0
+        "index_size": faiss_index.ntotal if faiss_index else 0,
+        "embedding_model": embedding_model.model_card_data.model_id if embedding_model else "not loaded",
+        "features": [
+            "Hybrid retrieval (FAISS + BM25)",
+            "Query expansion (HyDE)",
+            "Semantic chunking",
+            "Enhanced generation with optimized prompts"
+        ]
     }
 
 
 @app.post("/search")
-def search(request: SearchRequest):
+async def search(request: SearchRequest):
     """
-    Search for relevant chunks.
-    
-    Returns top-k most similar chunks to the query.
+    Search endpoint with hybrid retrieval
     """
-    if not chunks or not encoder or not index:
-        raise HTTPException(status_code=503, detail="Resources not loaded")
-    
-    # Encode query
-    query_vec = encoder.encode([request.query], convert_to_numpy=True)
-    faiss.normalize_L2(query_vec)
-    
-    # Search
-    distances, indices = index.search(query_vec, request.top_k)
-    
-    # Format results
-    results = []
-    for dist, idx in zip(distances[0], indices[0]):
-        results.append({
-            'chunk_id': int(idx),
-            'text': chunks[idx],
-            'score': float(dist)
-        })
-    
-    return {
-        'query': request.query,
-        'top_k': request.top_k,
-        'results': results
-    }
+    try:
+        # Create retriever
+        retriever = HybridRetriever(
+            chunks=chunks,
+            faiss_index=faiss_index,
+            embedding_model=embedding_model,
+            dense_weight=request.dense_weight,
+            sparse_weight=request.sparse_weight
+        )
+        
+        # Query expansion if requested
+        query_embedding = None
+        if request.use_query_expansion:
+            expander = QueryExpander(embedding_model, generator)
+            query_embedding = expander.expand_query(request.query)
+        
+        # Retrieve
+        results = retriever.retrieve(
+            request.query,
+            top_k=request.top_k,
+            use_hybrid=request.use_hybrid,
+            query_embedding=query_embedding
+        )
+        
+        # Format results
+        formatted_results = []
+        for result in results:
+            formatted_results.append({
+                "chunk_id": result['id'],
+                "text": result['text'],
+                "score": result['score'],
+                "metadata": result.get('metadata', {}),
+                "dense_score": result.get('dense_score'),
+                "sparse_score": result.get('sparse_score')
+            })
+        
+        return {
+            "query": request.query,
+            "top_k": request.top_k,
+            "use_hybrid": request.use_hybrid,
+            "use_query_expansion": request.use_query_expansion,
+            "results": formatted_results
+        }
+        
+    except Exception as e:
+        logger.error(f"Search error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/chat")
-def chat(request: ChatRequest):
+async def chat(request: ChatRequest):
     """
-    Answer question using retrieval + generation.
-    
-    Retrieves relevant chunks and optionally generates an answer.
+    Chat endpoint with answer generation
     """
-    if not chunks or not encoder or not index:
-        raise HTTPException(status_code=503, detail="Resources not loaded")
-    
-    # Encode query
-    query_vec = encoder.encode([request.query], convert_to_numpy=True)
-    faiss.normalize_L2(query_vec)
-    
-    # Search
-    distances, indices = index.search(query_vec, request.top_k)
-    
-    # Format chunks
-    retrieved_chunks = []
-    for dist, idx in zip(distances[0], indices[0]):
-        retrieved_chunks.append({
-            'chunk_id': int(idx),
-            'text': chunks[idx],
-            'score': float(dist)
-        })
-    
-    response = {
-        'query': request.query,
-        'chunks': retrieved_chunks
-    }
-    
-    # Generate answer if requested
-    if request.generate_answer and tokenizer and generator:
-        # Combine multiple chunks for richer context
-        top_chunks_for_context = retrieved_chunks[:min(request.top_k, len(retrieved_chunks))]
-        context = "\n\n".join([f"[Section {i+1}]: {chunk['text']}" for i, chunk in enumerate(top_chunks_for_context)])
+    try:
+        # Create retriever
+        retriever = HybridRetriever(
+            chunks=chunks,
+            faiss_index=faiss_index,
+            embedding_model=embedding_model,
+            dense_weight=request.dense_weight,
+            sparse_weight=request.sparse_weight
+        )
         
-        if request.answer_style == "detailed":
-            # Generate comprehensive, structured answer
-            prompt = f"""You are a knowledgeable legal assistant specializing in Indian mining laws and regulations. 
-Your task is to provide a clear, comprehensive, and well-structured answer to help users understand mining regulations.
+        # Query expansion if requested
+        query_embedding = None
+        if request.use_query_expansion:
+            expander = QueryExpander(embedding_model, generator)
+            query_embedding = expander.expand_query(request.query)
+        
+        # Retrieve - get top_k for ranking, but use only best for generation
+        results = retriever.retrieve(
+            request.query,
+            top_k=request.top_k,
+            use_hybrid=request.use_hybrid,
+            query_embedding=query_embedding
+        )
+        
+        # Get only the BEST matching chunk (highest score)
+        best_chunk = results[0] if results else None
+        
+        response = {
+            "query": request.query,
+            "best_chunk": {
+                "chunk_id": best_chunk['id'],
+                "text": best_chunk['text'],
+                "score": best_chunk['score'],
+                "metadata": best_chunk.get('metadata', {})
+            } if best_chunk else None,
+            "all_chunks": [
+                {
+                    "chunk_id": r['id'],
+                    "text": r['text'],
+                    "score": r['score'],
+                    "metadata": r.get('metadata', {})
+                }
+                for r in results
+            ],
+            "use_hybrid": request.use_hybrid,
+            "use_query_expansion": request.use_query_expansion
+        }
+        
+        # Generate answer if requested
+        if request.generate_answer and best_chunk:
+            # Use ONLY the best matching chunk for generation
+            metadata = best_chunk.get('metadata', {})
+            section = metadata.get('section', 'N/A')
+            act = metadata.get('act', 'N/A').replace('\n', ' ').strip()
+            score = best_chunk.get('score', 0.0)
+            
+            # Simple, focused context from the BEST chunk only
+            context = f"""Source: Section {section}, {act}
+Relevance Score: {score:.2f}
+
+Legal Text:
+{best_chunk['text']}"""
+            
+            # Build prompt for answer generation
+            if request.answer_style == "detailed":
+                prompt = f"""Based on the following legal provision from Indian mining laws, provide a comprehensive answer to the question.
 
 Question: {request.query}
 
-Relevant Legal Provisions:
+Legal Context:
 {context}
 
-Instructions for your answer:
-1. Start with a direct answer to the question
-2. Explain the key provisions and requirements in detail
-3. Include specific details like time periods, responsibilities, procedures, or penalties if mentioned
-4. Break down complex regulations into easy-to-understand points
-5. Use professional but accessible language
-6. Provide a complete answer that covers all relevant aspects from the legal provisions
-7. Structure your answer with clear paragraphs
+Provide a detailed answer that:
+1. Directly addresses the question
+2. Cites the specific section and act
+3. Explains key legal provisions clearly
+4. Mentions requirements, procedures, or penalties if applicable
+5. Uses clear, professional language
 
-Please provide a detailed, professional answer:"""
-
-            inputs = tokenizer(prompt, return_tensors='pt', max_length=1200, truncation=True)
-            outputs = generator.generate(
-                inputs.input_ids,
-                max_length=400,
-                min_length=80,
-                num_beams=6,
-                temperature=0.9,
-                top_p=0.95,
-                early_stopping=True,
-                no_repeat_ngram_size=4,
-                length_penalty=1.5,
-                repetition_penalty=1.2,
-                do_sample=False
-            )
-            
-            answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
-            
-        else:
-            # Extractive style - simpler, more direct
-            prompt = f"""Based on the legal context provided, answer the following question clearly and concisely.
+Answer:"""
+            else:  # concise
+                prompt = f"""Based on the legal provision below, provide a concise answer (2-3 sentences).
 
 Question: {request.query}
 
-Context: {context}
+Legal Context:
+{context}
 
-Answer:"""
+Concise Answer:"""
             
-            inputs = tokenizer(prompt, return_tensors='pt', max_length=800, truncation=True)
-            outputs = generator.generate(
-                inputs.input_ids,
-                max_length=200,
-                min_length=30,
-                num_beams=4,
-                early_stopping=True
-            )
+            # Check if we should use online LLM or local model
+            if USE_ONLINE_LLM and LLM_API_KEY:
+                # Use online LLM (Groq, OpenAI, etc.) - MUCH BETTER QUALITY!
+                logger.info(f"Generating answer with {LLM_PROVIDER} ({LLM_MODEL})")
+                answer = generate_answer_with_online_llm(prompt, provider=LLM_PROVIDER)
+                response['model'] = f"{LLM_PROVIDER}/{LLM_MODEL}"
+                response['generation_method'] = "online_llm"
+                
+            else:
+                # Use local FLAN-T5 model
+                logger.info("Generating answer with local FLAN-T5")
+                
+                # Enhanced generation parameters - optimized for CPU performance
+                if request.answer_style == "detailed":
+                    max_new_tokens = 300
+                    min_length = 80
+                    num_beams = 4
+                    length_penalty = 2.0
+                else:
+                    max_new_tokens = 120
+                    min_length = 30
+                    num_beams = 3
+                    length_penalty = 1.5
+                
+                generated = generator(
+                    prompt,
+                    max_new_tokens=max_new_tokens,
+                    min_length=min_length,
+                    num_beams=num_beams,
+                    length_penalty=length_penalty,
+                    repetition_penalty=1.2,
+                    no_repeat_ngram_size=3,
+                    early_stopping=True,
+                    do_sample=False
+                )
+                
+                answer = generated[0]['generated_text'].strip()
+                
+                # Fallback if answer is too short
+                if len(answer) < 30:
+                    answer = f"Based on Section {section} of {act}: {best_chunk['text'][:300]}..."
+                
+                response['model'] = "google/flan-t5-base (local)"
+                response['generation_method'] = "local_model"
             
-            answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            response['answer'] = answer
         
-        # Clean and format the answer
-        answer = answer.strip()
+        return response
         
-        # Remove any prompt remnants
-        if answer.lower().startswith(('answer:', 'detailed answer:', 'professional answer:')):
-            answer = answer.split(':', 1)[1].strip()
-        
-        # Ensure proper capitalization
-        if answer:
-            answer = answer[0].upper() + answer[1:]
-        
-        # Add punctuation if missing
-        if answer and not answer.endswith(('.', '!', '?')):
-            answer += '.'
-        
-        # If answer is still poor quality, create a structured extractive summary
-        if len(answer) < 50 or not answer:
-            # Fallback: Create structured answer from chunks
-            key_points = []
-            for chunk in top_chunks_for_context:
-                # Extract sentences mentioning key terms from the query
-                sentences = chunk['text'].split('.')
-                for sentence in sentences[:3]:  # Take up to 3 sentences per chunk
-                    if len(sentence.strip()) > 20:
-                        key_points.append(sentence.strip())
-            
-            if key_points:
-                answer = f"According to the mining regulations: {'. '.join(key_points[:3])}."
-        
-        response['answer'] = answer
-        response['context_used'] = len(top_chunks_for_context)
-        response['model'] = 'google/flan-t5-base'
-        response['answer_style'] = request.answer_style
-    
-    return response
+    except Exception as e:
+        logger.error(f"Chat error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import uvicorn
-    print("Starting Mining Laws QA API server...")
-    print("Visit http://localhost:8000/docs for API documentation")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
