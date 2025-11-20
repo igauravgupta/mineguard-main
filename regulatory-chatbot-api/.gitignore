@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Model files and checkpoints
+models/
+checkpoints/
+*.index
+*.pkl
+*.pth
+*.bin
+*.ckpt
+*.safetensors
+
+# Data files (optional - uncomment if you want to exclude data)
+# data/chunks.pkl
+# data/chunks.jsonl
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
