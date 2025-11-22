@@ -1,0 +1,60 @@
+# Python virtual environments (downloaded packages)
+venv/
+env/
+ENV/
+.venv/
+.env/
+*.pyenv/
+
+# Environment variables (contains API keys)
+.env
+.env.local
+.env.*.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Model files (large downloaded model weights - 417MB)
+models/bi_encoder_finetuned/model.safetensors
+models/bi_encoder_finetuned/*.safetensors
+models/*.index
+models/*.bin
+models/*.pt
+models/*.pth
+*.safetensors
+
+# FAISS indices (generated from data)
+*.index
+
+# Checkpoints (training artifacts)
+checkpoints/
+*.ckpt
+
+# Evaluation results (generated output)
+evaluation_results_*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+*.log
+logs/
+
+# Backup files
+*.backup
