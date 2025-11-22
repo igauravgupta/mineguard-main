@@ -221,7 +221,7 @@ def main():
     
     # Save results
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_file = f"tests/evaluation_results_{timestamp}.json"
+    output_file = f"evaluation_results_{timestamp}.json"
     
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump({

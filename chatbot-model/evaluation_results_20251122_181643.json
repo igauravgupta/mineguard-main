@@ -1,0 +1,299 @@
+{
+  "timestamp": "20251122_181643",
+  "total_queries": 30,
+  "completed": 11,
+  "failed": 19,
+  "avg_accuracy_5": null,
+  "avg_precision_1": null,
+  "results": [
+    {
+      "query": "",
+      "reference": "Government can delegate its powers to subordinate authorities through official notifications.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the responsibilities and duties of various officials in a mine, including the manager, mining mate, and other competent persons. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the maintenance of records, reports, and registers to ensure compliance with the regulations.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) requires the mining mate to have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act (Section 3(3)(a)). Section 37 (part 6) requires the maintenance of records, reports, and registers (Regulation 117).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Maintaining records, reports, and registers (Regulation 117)\n* Ensuring the safe working of the mine (Section 47(1)(a))\n* Providing a sufficient supply of proper materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Countersigning reports and registers (Section 3(6))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is noted that the manager may delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)). Additionally, the Act may not apply to certain types of mines or mining operations, but this is not specified in the provided context.",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Wages must be paid regularly as per wage board recommendations, with deductions only for authorized purposes.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and overman. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of materials and appliances, assign duties to competent persons, and examine reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiencies in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) states that the mining mate or other competent person shall have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Taking necessary precautions to prevent accidents (Section 3(5))\n* Providing a sufficient supply of materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Examining reports and records (Section 3(6))\n* Ensuring the proper observance of the requirements of the Act and regulations (Section 47(1)(b))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, Section 3(7) allows the manager to delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register. Additionally, Section 47(2)(d) allows an inexperienced person to be employed on any work under the supervision of an experienced person.",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Affected parties can file objections after notification, which are heard before granting prospecting rights.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and overman. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) states that the mining mate shall have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Taking necessary precautions to prevent accidents (Section 3(5))\n* Providing a sufficient supply of proper materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Examining all reports and records (Section 3(6))\n* Ensuring the proper observance of the requirements of the Act and regulations (Section 47(1)(b))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is noted that the manager may delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)). Additionally, the mining mate may order a person out of the mine if they are found in a place other than the one assigned to them, and shall report the matter to their superior official (Section 47(2)(c)).",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Adequate protective equipment including helmets, boots, gloves, and respirators must be provided free of cost.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and overman. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) of the Act states that the manager shall report to his superior official any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4) and 3(5)(b)). Section 3 (part 48) requires the manager to assign duties to every competent person and provide them with a copy of the regulations, rules, and bye-laws (Section 3(4)). Section 3 (part 44) states that the manager shall see that a sufficient supply of proper materials and appliances is always provided at the mine (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers to their superior official (Section 3(4) and 3(5)(b))\n* Assigning duties to competent persons and providing them with a copy of the regulations, rules, and bye-laws (Section 3(4))\n* Ensuring a sufficient supply of proper materials and appliances is always provided at the mine (Section 3(3)(a))\n* Examining all reports and records required to be made or kept in pursuance of the Act or of the regulations (Section 3(6))\n* Providing a tracing of the workings of the district below ground assigned to every overman (Section 3(5))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is stated that the manager may, by an order in writing, delegate the duty of examining reports and records to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)).",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Offenses can be taken cognizance only on complaint by inspector or authorized officer.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mates, and other competent persons. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) states that the manager shall assign to every competent person their particular duties and provide them with a copy of the regulations, rules, and bye-laws (Section 3(4)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Taking necessary precautions to prevent accidents (Section 3(5)(a))\n* Providing a sufficient supply of proper materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Examining all reports and records (Section 3(6))\n* Ensuring that all travelling roadways and working places are made and kept secure (Section 47(3)(a))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is mentioned that the manager may, by an order in writing, delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)). Additionally, the Act allows for the owner or agent of the mine to take action on a requisition made by the manager, and to inform the manager in writing of the action taken (Section 3(3)(b)).",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Abandoned mines must be secured, sealed, and marked to prevent unauthorized entry and ensure public safety.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the responsibilities and duties of various officials in a mine, including the manager, mining mate, and other competent persons. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) states that the mining mate shall have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances (Section 3(3)(a)).\n\n**Key Requirements:**\nKey requirements include:\n* The manager and mining mate must report any deficiencies or dangers in the mine (Section 3(4) and Section 47(1)(b)).\n* The manager must provide a sufficient supply of proper materials and appliances (Section 3(3)(a)).\n* The mining mate must have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)).\n* The manager must assign duties to competent persons and ensure they understand and enforce the provisions of the Act and regulations (Section 3(4)).\n* The manager must examine all reports, registers, and other records required to be made or kept in pursuance of the Act or regulations (Section 3(6)).\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, Section 3(6) allows the manager to delegate the duty of countersigning reports and registers to an undermanager or assistant manager, except in cases where a specific provision requires the manager to countersign. Additionally, Section 47(2)(d) allows the mining mate to order an inexperienced person out of the mine if they are found in a place other than the one assigned to them, but only if the mining mate reports the matter to their superior official.",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Lessees must maintain minimum production levels and utilize best mining practices for optimal resource extraction.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and overman. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of materials and appliances, assign duties to competent persons, and examine reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiencies in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) states that the mining mate or other competent person shall have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Taking necessary precautions to prevent accidents (Section 3(5))\n* Providing a sufficient supply of materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Examining reports and records (Section 3(6))\n* Ensuring the proper observance of the requirements of the Act and regulations (Section 47(1)(b))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is noted that the manager may delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)). Additionally, the Act may not apply to certain types of mines or mining operations, but this is not specified in the provided context.",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Adequate bathing facilities with hot and cold water must be provided for workers at pit head.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and other competent persons. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) of the Act states that the manager shall report to his superior official any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) requires the manager to assign to every competent person their particular duties and provide them with a copy of the regulations, rules, and bye-laws (Section 47(1)(a)). Section 3 (part 44) states that the manager shall see that a sufficient supply of proper materials and appliances is always provided at the mine (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers to their superior official (Section 3(4))\n* Assigning duties to competent persons and providing them with a copy of the regulations, rules, and bye-laws (Section 47(1)(a))\n* Providing a sufficient supply of proper materials and appliances (Section 3(3)(a))\n* Examining all reports and records required to be made or kept in pursuance of the Act or of the regulations (Section 3(6))\n* Countersigning reports and registers (Section 3(6))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is worth noting that the Act allows the manager to delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)). Additionally, the Act requires the owner or agent to take immediate action and inform the manager in writing of the action taken within three days of receipt of a requisition (Section 3(3)(b)).",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "When a company commits an offense, directors and managers can be held liable unless they prove lack of knowledge.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and overman. These officials are responsible for ensuring the safe working of the mine and the safety of persons employed therein. They are required to conduct regular inspections, report any deficiencies or dangers, and take necessary precautions to prevent accidents.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) requires the mining mate to have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act and of the regulations or orders made thereunder (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Conducting regular inspections of the mine and reporting any deficiencies or dangers (Section 3(4) and Section 47(1)(a))\n* Ensuring the proper observance of the requirements of the Act and of the regulations, and orders made thereunder (Section 47(1)(b))\n* Providing a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act and of the regulations or orders made thereunder (Section 3(3)(a))\n* Assigning particular duties to every competent person and ensuring that they understand, carry out, and enforce the provisions of the Act and regulations (Section 3(4))\n* Maintaining accurate records and reports, including a bound-paged book for recording general reports on the performance of duties (Section 3(10))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is noted that the manager may, by an order in writing, delegate certain duties to an undermanager or assistant manager, except in cases where a specific provision is made requiring the manager to countersign a report or register (Section 3(6)). Additionally, the regulations may not apply in cases where a mine is worked by a continuous succession of shifts, in which case the mining mate shall proceed to the station appointed under regulation 116 and instruct all persons as to their places of work and as to any special precautions necessary to be observed by them (Section 47(2)(b)).",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Accurate records of workers' attendance, working hours, and wages must be maintained in prescribed registers.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the responsibilities and duties of various officials in a mine, including the manager, overman, and mining mate. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) of the Act requires the overman to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) requires the overman to make inspections and reports, and to take reasonable means to ensure the proper observance of the requirements of the Act and regulations (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records (Sections 3(3)(a) and 3(6)).\n\n**Key Requirements:**\nThe key requirements for mine officials under the Mines Act, 1952, include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Making regular inspections and reports (Section 47(1)(a))\n* Taking reasonable means to ensure the proper observance of the requirements of the Act and regulations (Section 47(1)(a))\n* Providing a sufficient supply of proper materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Examining all reports and records (Section 3(6))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is worth noting that the Act requires the manager to delegate certain duties to undermanagers or assistant managers in writing (Section 3(6)). Additionally, the Act requires the owner or agent to take immediate action and inform the manager in writing of the action taken in response to a requisition (Section 3(3)(b)).",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Central Government declares certain minerals under Union control in public interest for regulation and development.",
+      "generated": "**Direct Answer:**\nThe Mines Act, 1952, outlines the duties and responsibilities of various officials in a mine, including the manager, mining mate, and overman. These officials are responsible for ensuring the safe working of the mine, reporting any deficiencies or dangers, and taking necessary precautions to prevent accidents. The Act also requires the manager to provide a sufficient supply of proper materials and appliances, assign duties to competent persons, and examine all reports and records.\n\n**Legal Basis:**\nThe Mines Act, 1952, specifically sections 3 (part 49), 3 (part 48), 3 (part 44), and 37 (part 6), outline the duties and responsibilities of mine officials. Section 3 (part 49) requires the manager to report any deficiency in timber, appliances, and other necessaries required for the safe working of the district (Section 3(4)). Section 3 (part 48) states that the mining mate or other competent person shall have responsible charge and control of the district of the mine assigned to him (Section 47(1)(a)). Section 3 (part 44) requires the manager to provide a sufficient supply of proper materials and appliances for the purpose of carrying out the provisions of the Act (Section 3(3)(a)).\n\n**Key Requirements:**\nThe key requirements for mine officials include:\n* Reporting any deficiencies or dangers in the mine (Section 3(4))\n* Taking necessary precautions to prevent accidents (Section 3(5))\n* Providing a sufficient supply of proper materials and appliances (Section 3(3)(a))\n* Assigning duties to competent persons (Section 3(4))\n* Examining all reports and records (Section 3(6))\n* Ensuring the proper observance of the requirements of the Act and regulations (Section 47(1)(b))\n\n**Exceptions (if any):**\nThere are no specific exceptions mentioned in the provided context. However, it is noted that the manager may, by an order in writing, delegate certain duties to an undermanager or assistant manager (Section 3(6)). Additionally, the Act requires the manager to report any deficiencies or dangers, but it does not specify what happens if the manager fails to do so. It is likely that failure to comply with the Act's requirements would result in penalties or other consequences, but this is not explicitly stated in the provided context.",
+      "has_citations": true,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "completed"
+    },
+    {
+      "query": "",
+      "reference": "Pre-employment and periodic medical examinations are mandatory to ensure fitness for underground work.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99494, Requested 1954. Please try again in 20m51.072s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Government can make rules for implementation, safety standards, procedures, and other matters under the Acts.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99494, Requested 1954. Please try again in 20m51.072s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Clean and cool drinking water must be provided at convenient locations with proper storage and distribution.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99494, Requested 1954. Please try again in 20m51.072s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Officials acting in good faith are protected from legal suits for actions taken in discharge of duties.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99494, Requested 1954. Please try again in 20m51.072s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Comprehensive records of production, employment, accidents, inspections, and compliance must be maintained.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99494, Requested 1954. Please try again in 20m51.072s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "It is a statutory payment by lessees for development of mineral resources and affected areas.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99493, Requested 1954. Please try again in 20m50.208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Accurate plans showing surface and underground workings must be prepared, certified, and regularly updated.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99493, Requested 1954. Please try again in 20m50.208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Coal beneficiation may be mandated to improve quality and reduce environmental impact.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99493, Requested 1954. Please try again in 20m50.208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Disputes are resolved through designated authorities, tribunals, and appellate mechanisms under the Acts.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99493, Requested 1954. Please try again in 20m50.208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "State Government grants mineral concessions, enforces regulations, collects royalties, and administers mining within state.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99492, Requested 1954. Please try again in 20m49.344s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Workers displaced due to mine closure must be provided rehabilitation assistance and alternative employment.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99492, Requested 1954. Please try again in 20m49.344s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Mining must be conducted using scientific methods to maximize recovery and minimize waste.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99492, Requested 1954. Please try again in 20m49.344s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Workers are entitled to weekly rest days, national holidays, and festival holidays with wages.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99492, Requested 1954. Please try again in 20m49.344s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Minerals must be conserved through optimal extraction, prevention of waste, and sustainable practices.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99492, Requested 1954. Please try again in 20m49.344s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Emergency plans, trained personnel, equipment, and communication systems must be established for accidents.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99491, Requested 1954. Please try again in 20m48.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Major minerals are those specified in First Schedule and regulated by Central Government.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99491, Requested 1954. Please try again in 20m48.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Contractors must be registered, comply with safety standards, and ensure worker welfare as principal employers.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99491, Requested 1954. Please try again in 20m48.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Prescribed fees must be paid for applications, renewals, and various services under mining regulations.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99491, Requested 1954. Please try again in 20m48.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "query": "",
+      "reference": "Documents must be signed by authorized persons with attestation and verification as prescribed.",
+      "generated": null,
+      "has_citations": false,
+      "accuracy_5": null,
+      "precision_1": null,
+      "status": "failed",
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kannz8kef0h8ygt4dj2dmr69` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99491, Requested 1954. Please try again in 20m48.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ]
+}
