@@ -217,6 +217,7 @@ class MiningLawsChatbot:
         print("="*70)
         print("Initializing Mining Laws Chatbot (Step 14 Compliant Pipeline)")
         print("="*70)
+        sys.stdout.flush()
         
         # Determine whether to use fine-tuned or base model
         use_finetuned = os.path.exists(index_path)
@@ -227,26 +228,36 @@ class MiningLawsChatbot:
             index_path = "models/mining_laws_base.index"
             model_path = "sentence-transformers/all-mpnet-base-v2"
             print(f"  Using base index: {index_path}")
+            sys.stdout.flush()
         
         # Initialize retrieval system
         print("\n[1/3] Loading Retrieval System...")
+        sys.stdout.flush()
         self.retrieval = RetrievalSystem(use_finetuned=use_finetuned)
         self.retrieval_method = retrieval_method
         self.top_k = top_k
+        print("[1/3] ✓ Retrieval System loaded")
+        sys.stdout.flush()
         
         # Initialize answer generator
         print("\n[2/3] Loading Answer Generator...")
+        sys.stdout.flush()
         self.generator = AnswerGenerator(
             api_key=groq_api_key,
             model="llama-3.3-70b-versatile",
             temperature=0.3,
             max_tokens=1024
         )
+        print("[2/3] ✓ Answer Generator loaded")
+        sys.stdout.flush()
         
         # Initialize post-processor
         print("\n[3/3] Initializing Post-Processor...")
+        sys.stdout.flush()
         self.post_processor = AnswerPostProcessor()
         self.min_answer_length = min_answer_length
+        print("[3/3] ✓ Post-Processor ready")
+        sys.stdout.flush()
         
         print("\n" + "="*70)
         print("✓ Chatbot Ready (Step 14 Compliant)!")
@@ -254,6 +265,7 @@ class MiningLawsChatbot:
         print(f"  Model: Groq Llama 3.1 70B")
         print(f"  Post-processing: Enabled (citations, validation)")
         print("="*70 + "\n")
+        sys.stdout.flush()
     
     def ask(self, query: str, verbose: bool = True) -> Dict:
         """

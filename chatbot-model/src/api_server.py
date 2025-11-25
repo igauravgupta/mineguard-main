@@ -37,21 +37,37 @@ async def lifespan(app: FastAPI):
         print("API will not work without it.\n")
     else:
         try:
+            print("\n[CHECKPOINT 1] Starting chatbot initialization...")
+            print("This may take 20-30 seconds on first load...")
+            import sys
+            sys.stdout.flush()
+            
             # Initialize chatbot
+            print("[CHECKPOINT 2] Importing MiningLawsChatbot...")
+            sys.stdout.flush()
+            
             chatbot = MiningLawsChatbot(
                 retrieval_method="hybrid",
                 top_k=5,
                 min_answer_length=100
             )
+            
+            print("[CHECKPOINT 3] Chatbot object created!")
+            sys.stdout.flush()
+            
             print("\n✓ Chatbot initialized successfully!")
             print("API server ready on http://localhost:8000")
             print("Docs available at http://localhost:8000/docs")
             print("="*70 + "\n")
+            sys.stdout.flush()
         except Exception as e:
             print(f"\n✗ Failed to initialize chatbot: {e}")
+            import traceback
+            traceback.print_exc()
             print("\nMake sure you've run:")
             print("  python build_base_index.py")
             print("="*70 + "\n")
+            sys.stdout.flush()
     
     yield
     
